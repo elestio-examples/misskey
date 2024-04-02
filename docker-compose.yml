@@ -21,7 +21,7 @@ services:
 
   redis:
     restart: always
-    image: redis:7-alpine
+    image: elestio/redis:7.0
     # networks:
     #   - internal_network
     volumes:
@@ -29,14 +29,28 @@ services:
 
   db:
     restart: always
-    image: postgres:15-alpine
+    image: elestio/postgres:15
     # networks:
     #   - internal_network
     env_file:
       - ./.env
     volumes:
       - ./db:/var/lib/postgresql/data
-# networks:
-#   internal_network:
-#     internal: true
-#   external_network:
+    ports:
+      - 172.17.0.1:8073:5432
+  # networks:
+  #   internal_network:
+  #     internal: true
+  #   external_network:
+
+  pgadmin:
+    image: elestio/pgadmin:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
+      PGADMIN_LISTEN_PORT: 8080
+    ports:
+      - "172.17.0.1:49343:8080"
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json

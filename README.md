@@ -10,6 +10,14 @@ Deploy Misskey server with CI/CD on Elestio
 
 # Once deployed ...
 
-You can open Misskey ADMIN UI here:
+You can open Misskey here:
 
     URL: https://[CI_CD_DOMAIN]
+    login: "admin"
+    password: "[ADMIN_PASSWORD]"
+
+You can open pgAdmin here:
+
+    URL: "https://[CI_CD_DOMAIN]:12469"
+    login: "[ADMIN_EMAIL]"
+    password: "[ADMIN_PASSWORD]"
