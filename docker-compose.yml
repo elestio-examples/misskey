@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  web:
+    image: misskey/misskey:${SOFTWARE_VERSION_TAG}
+    restart: always
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "172.17.0.1:9009:3000"
+    # networks:
+    #   - internal_network
+    #   - external_network
+    volumes:
+      - ./files:/misskey/files
+      - ./misskey/.config:/misskey/.config:ro
+
+  redis:
+    restart: always
+    image: redis:7-alpine
+    # networks:
+    #   - internal_network
+    volumes:
+      - ./redis:/data
+
+  db:
+    restart: always
+    image: postgres:15-alpine
+    # networks:
+    #   - internal_network
+    env_file:
+      - ./.env
+    volumes:
+      - ./db:/var/lib/postgresql/data
+# networks:
+#   internal_network:
+#     internal: true
+#   external_network:
