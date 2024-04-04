@@ -55,7 +55,7 @@ db:
 
   # Auth
   user: ${POSTGRES_USER}
-  pass: ${POSTGRES_PASSWRD}
+  pass: ${POSTGRES_PASSWORD}
 
   # Whether disable Caching queries
   #disableCache: true
