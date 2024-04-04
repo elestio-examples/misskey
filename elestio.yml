@@ -32,6 +32,8 @@ environments:
     value: "misskey"
   - key: "DATABASE_URL"
     value: "postgres://postgres:random_password@db:5432/misskey"
+  - key: "FROM_EMAIL"
+    value: "[DOMAIN]@vm.elestio.app"
 config:
   runTime: "dockerCompose"
   version: ""

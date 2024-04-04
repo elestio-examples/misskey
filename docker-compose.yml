@@ -16,8 +16,8 @@ services:
     #   - internal_network
     #   - external_network
     volumes:
-      - ./files:/misskey/files
-      - ./misskey/.config:/misskey/.config:ro
+      - ./storage/files:/misskey/files
+      - ./storage/misskey/.config:/misskey/.config:ro
 
   redis:
     restart: always
@@ -25,7 +25,7 @@ services:
     # networks:
     #   - internal_network
     volumes:
-      - ./redis:/data
+      - ./storage/redis:/data
 
   db:
     restart: always
@@ -35,7 +35,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./storage/db:/var/lib/postgresql/data
     ports:
       - 172.17.0.1:8073:5432
   # networks:
@@ -53,4 +53,4 @@ services:
     ports:
       - "172.17.0.1:49343:8080"
     volumes:
-      - ./servers.json:/pgadmin4/servers.json
+      - ./storage/servers.json:/pgadmin4/servers.json
